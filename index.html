@@ -21,6 +21,51 @@
       --green:  #00d084;
       --font:   'Segoe UI', system-ui, sans-serif;
     }
+
+    /* ── LIGHT MODE OVERRIDES ────────────────────────── */
+    html.light {
+      --dark:   #f5f5f7;
+      --dark2:  #ebebef;
+      --dark3:  #e0e0e8;
+      --card:   #ffffff;
+      --border: #d0d0dc;
+      --text:   #111118;
+      --muted:  #555566;
+      --white:  #111118;
+    }
+    html.light nav {
+      background: rgba(245,245,247,0.92);
+    }
+    html.light .ecg-bg { opacity: 0.08; }
+    html.light .about-img-placeholder { background: linear-gradient(135deg, #e0e0e8, #ebebef); }
+
+    /* ── THEME TOGGLE BUTTON ─────────────────────────── */
+    #theme-toggle {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 200;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: background 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.2s;
+    }
+    #theme-toggle:hover {
+      border-color: var(--red);
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(232,25,44,0.25);
+    }
+    #theme-toggle svg { width: 20px; height: 20px; fill: var(--text); transition: fill 0.3s; }
+
+    /* smooth theme transition on all elements */
+    *, *::before, *::after {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
@@ -1035,10 +1080,54 @@
 </footer>
 
 <!-- ══════════════════════════════════════════════════════
+     THEME TOGGLE BUTTON
+══════════════════════════════════════════════════════ -->
+<button id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle dark/light mode">
+  <!-- Moon icon (shown in dark mode) -->
+  <svg id="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+  </svg>
+  <!-- Sun icon (shown in light mode, hidden by default) -->
+  <svg id="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <path d="M12 4.5a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 4.5zM18.364 6.343a.75.75 0 0 1 0 1.06l-1.06 1.061a.75.75 0 1 1-1.06-1.06l1.06-1.061a.75.75 0 0 1 1.06 0zM19.5 12a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5a.75.75 0 0 1 .75.75zm-2.136 5.364a.75.75 0 0 1-1.06 0l-1.061-1.06a.75.75 0 0 1 1.06-1.061l1.061 1.06a.75.75 0 0 1 0 1.061zM12 18a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 18zm-5.364-1.636a.75.75 0 0 1 0-1.06l1.06-1.061a.75.75 0 0 1 1.061 1.06l-1.06 1.061a.75.75 0 0 1-1.061 0zM4.5 12a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5A.75.75 0 0 1 4.5 12zm2.136-5.364a.75.75 0 0 1 1.06 0l1.061 1.06a.75.75 0 0 1-1.06 1.061L6.636 7.697a.75.75 0 0 1 0-1.061zM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5z"/>
+  </svg>
+</button>
+
+<!-- ══════════════════════════════════════════════════════
      JS — scroll reveal
 ══════════════════════════════════════════════════════ -->
 <script>
-  // Scroll reveal
+  // ── Theme toggle ──────────────────────────────────────
+  const html        = document.documentElement;
+  const toggleBtn   = document.getElementById('theme-toggle');
+  const iconMoon    = document.getElementById('icon-moon');
+  const iconSun     = document.getElementById('icon-sun');
+
+  function applyTheme(mode) {
+    if (mode === 'light') {
+      html.classList.add('light');
+      iconMoon.style.display = 'none';
+      iconSun.style.display  = 'block';
+      toggleBtn.title = 'Switch to dark mode';
+    } else {
+      html.classList.remove('light');
+      iconMoon.style.display = 'block';
+      iconSun.style.display  = 'none';
+      toggleBtn.title = 'Switch to light mode';
+    }
+  }
+
+  // Load saved preference — default dark
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  applyTheme(savedTheme);
+
+  toggleBtn.addEventListener('click', () => {
+    const next = html.classList.contains('light') ? 'dark' : 'light';
+    applyTheme(next);
+    localStorage.setItem('theme', next);
+  });
+
+  // ── Scroll reveal ──────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
