@@ -1,0 +1,287 @@
+Date: Sun, 11 Jan 2026 10:51:08 +0000 (UTC)
+Message-ID: <1668163460.211.1768128668954@2feb514e892b>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_210_1591427557.1768128668954"
+
+------=_Part_210_1591427557.1768128668954
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Guide to Breathing techniques.</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Guide to Breathing techniques.</h1>
+    <div class=3D"Section1">
+        <p>An average human eats 89,790 meals in <strong>lifetime</strong>,=
+ spends 229,961 hours of his <strong>life</strong> sleeping, and takes <str=
+ong>8,409,600 breaths in a Year</strong>!!</p>
+<p>Breathing, the very sign of life, a simple and automatic act and yet is =
+the most neglected aspect of daily routine. We put a lot of efforts and foc=
+us on Eating right, and sleeping adequately, which is not sufficient for op=
+timum health and physical state if we don=E2=80=99t know how to breathe rig=
+ht.</p>
+<p>Breathing has a deep impact on mental and physical state and intentional=
+ly practicing breathing the right way has the ability to enhance mental foc=
+us, physical performance, relieve stress and aid recovery after workout.</p=
+>
+<p>This document aims to detail the different breathing techniques which ca=
+n influence the autonomic balance. Different breathing patterns discussed b=
+elow have a different effect and can be used as a means of mind-body connec=
+tion. Practice these breathing techniques regularly for better results and =
+benefits.</p>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/NCO/pages/82509=
+875/Resonance+Breathing+Technique" data-linked-resource-id=3D"82509875" dat=
+a-linked-resource-version=3D"5" data-linked-resource-type=3D"page">Resonanc=
+e Breathing - Guide to Breathing and How to</a></p>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/~712020cec19715=
+604f4b198d96dfce72dcdae6/pages/82706433/Ease+Anxiety+and+Mind+relaxing+Brea=
+thing+-+Guide+to+Breathing+and+How+to" data-linked-resource-id=3D"82706433"=
+ data-linked-resource-version=3D"1" data-linked-resource-type=3D"page">Ease=
+ Anxiety and Mind relaxing Breathing - Guide to Breathing and How to</a></p=
+>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/~712020cec19715=
+604f4b198d96dfce72dcdae6/pages/82673665/Calming+Deep+Breathing+-+Guide+to+B=
+reathing+and+How+to" data-linked-resource-id=3D"82673665" data-linked-resou=
+rce-version=3D"1" data-linked-resource-type=3D"page">Calming &amp; Deep Bre=
+athing - Guide to Breathing and How to</a></p>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/~712020cec19715=
+604f4b198d96dfce72dcdae6/pages/82706450/Focus+Enhancement+BOX+Breathing+-+G=
+uide+to+Breathing+and+How+to" data-linked-resource-id=3D"82706450" data-lin=
+ked-resource-version=3D"1" data-linked-resource-type=3D"page">Focus Enhance=
+ment =E2=80=93 BOX Breathing - Guide to Breathing and How to</a></p>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/~712020cec19715=
+604f4b198d96dfce72dcdae6/pages/82706467/Workout+Priming+Breathing+-+Guide+t=
+o+Breathing+and+How+to" data-linked-resource-id=3D"82706467" data-linked-re=
+source-version=3D"1" data-linked-resource-type=3D"page">Workout Priming Bre=
+athing - Guide to Breathing and How to</a></p>
+<p><a href=3D"https://netrin-tech.atlassian.net/wiki/spaces/~712020cec19715=
+604f4b198d96dfce72dcdae6/pages/82706484/Post+Workout+Recovery+Breathing+-+G=
+uide+to+Breathing+and+How+to" data-linked-resource-id=3D"82706484" data-lin=
+ked-resource-version=3D"1" data-linked-resource-type=3D"page">Post Workout =
+Recovery Breathing - Guide to Breathing and How to</a></p>
+<p>Remember, consistent practice of these breathing techniques can provide =
+significant benefits. Choose the technique that best suits your current nee=
+ds and make it a regular part of your routine for optimal results.</p>
+<p></p>
+    </div>
+</body>
+</html>
+------=_Part_210_1591427557.1768128668954--

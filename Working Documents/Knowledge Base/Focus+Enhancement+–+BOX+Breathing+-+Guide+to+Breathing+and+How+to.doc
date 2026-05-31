@@ -1,0 +1,382 @@
+Date: Sun, 11 Jan 2026 10:54:43 +0000 (UTC)
+Message-ID: <1496289458.25.1768128883520@f9e2c060186a>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_24_599198399.1768128883519"
+
+------=_Part_24_599198399.1768128883519
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>Focus Enhancement =E2=80=93 BOX Breathing - Guide to Breathing a=
+nd How to</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font: var(--ds-font-body-small, Arial, Helvetica, FreeSans, sans-se=
+rif);
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-text, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        page-break-after: avoid;
+    }
+
+    pre {
+        font: var(--ds-font-code, Monaco, "Courier New", monospace);
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>Focus Enhancement =E2=80=93 BOX Breathing - Guide to Breathing and =
+How to</h1>
+    <div class=3D"Section1">
+        <p>This is a technique helps enhance focus and concentration by com=
+bining deep breaths with a pause between each phase. The SNS and PNS is equ=
+ally stimulated to ensure a balance.</p>
+<h2 id=3D"FocusEnhancement=E2=80=93BOXBreathing-GuidetoBreathingandHowto-In=
+structions"><img class=3D"emoticon emoticon-blue-star" data-emoji-id=3D"1f4=
+d8" data-emoji-shortname=3D":blue_book:" data-emoji-fallback=3D"\uD83D\uDCD=
+8" src=3D"5b59babcae7cb54d196aaff4825f4bdf56c2bc39e071c1fbc3297ad49d2560f7"=
+ width=3D"16" height=3D"16" data-emoticon-name=3D"blue-star" alt=3D"(blue s=
+tar)">&nbsp;Instructions</h2>
+<ol start=3D"1">
+<li>
+<p>Find a comfortable seated position.</p></li>
+<li>
+<p>Use a 60BPM metronome as the guide. Each tik sound of the metronome repr=
+esents one second / one count.</p></li>
+<li>
+<p>&nbsp;You can use this metronome link <a class=3D"external-link" href=3D=
+"https://www.youtube.com/watch?v=3DymJIXzvDvj4" rel=3D"nofollow">60 BPM - M=
+etronome - YouTube</a></p></li>
+<li>
+<p>Inhale deeply through your nose for a count of 4.</p></li>
+<li>
+<p>Hold your breath for a count of 1.</p></li>
+<li>
+<p>Exhale slowly and completely through your mouth for a count of 6.</p></l=
+i>
+<li>
+<p>Pause for a count of 1 before beginning the next inhale.</p></li>
+<li>
+<p>Repeat this pattern, maintaining a relaxed pace.</p></li>
+<li>
+<p>Practice breathing for 4-5 mins for optimum benefit</p></li>
+<li>
+<p>If it feels difficult to continue this pattern for more than 2-3 minutes=
+, take a short break and start gain. Continue till you feel your less anxio=
+us.</p></li>
+</ol>
+<div class=3D"confluence-information-macro confluence-information-macro-inf=
+ormation">
+<span class=3D"aui-icon aui-icon-small aui-iconfont-info confluence-informa=
+tion-macro-icon"></span>
+<div class=3D"confluence-information-macro-body">
+<p><strong>Biofeedback:</strong></p>
+<ul>
+<li>
+<p>Focus on the pause after exhaling, letting go of any tension.</p></li>
+<li>
+<p>Feel anxiety melting away with each exhale.</p></li>
+<li>
+<p>Experience a sense of relief and ease.</p></li>
+</ul>
+</div>
+</div>
+<h2 id=3D"FocusEnhancement=E2=80=93BOXBreathing-GuidetoBreathingandHowto-Re=
+latedarticles"><img class=3D"emoticon emoticon-blue-star" data-emoji-id=3D"=
+1f4cb" data-emoji-shortname=3D":clipboard:" data-emoji-fallback=3D"\uD83D\u=
+DCCB" src=3D"8b42c56981f9df81bed07edc1cf8640dbac4572001869f91dd6588faa6d7ad=
+69" width=3D"16" height=3D"16" data-emoticon-name=3D"blue-star" alt=3D"(blu=
+e star)">&nbsp;Related articles</h2>
+<p></p>
+<ul class=3D"content-by-label">
+<li>
+<div>
+<span class=3D"icon aui-icon content-type-page" title=3D"Page">Page:</span>
+</div>
+<div class=3D"details">
+<a id=3D"368803861" data-linked-resource-id=3D"368803861" data-linked-resou=
+rce-type=3D"page" data-linked-resource-version=3D"1" href=3D"https://netrin=
+-tech.atlassian.net/wiki/spaces/~712020cec19715604f4b198d96dfce72dcdae6/pag=
+es/368803861/Resonance+Breathing+-+Guide+to+Breathing+and+How+to">Resonance=
+ Breathing - Guide to Breathing and How to</a>
+</div></li>
+<li>
+<div>
+<span class=3D"icon aui-icon content-type-page" title=3D"Page">Page:</span>
+</div>
+<div class=3D"details">
+<a id=3D"69107745" data-linked-resource-id=3D"69107745" data-linked-resourc=
+e-type=3D"page" data-linked-resource-version=3D"6" href=3D"https://netrin-t=
+ech.atlassian.net/wiki/spaces/~712020cec19715604f4b198d96dfce72dcdae6/pages=
+/69107745/Usha+Verma-Training+plan">Usha Verma-Training plan</a>
+</div></li>
+<li>
+<div>
+<span class=3D"icon aui-icon content-type-page" title=3D"Page">Page:</span>
+</div>
+<div class=3D"details">
+<a id=3D"82509894" data-linked-resource-id=3D"82509894" data-linked-resourc=
+e-type=3D"page" data-linked-resource-version=3D"3" href=3D"https://netrin-t=
+ech.atlassian.net/wiki/spaces/~712020cec19715604f4b198d96dfce72dcdae6/pages=
+/82509894/Guide+to+Breathing+techniques.">Guide to Breathing techniques.</a=
+>
+</div></li>
+<li>
+<div>
+<span class=3D"icon aui-icon content-type-page" title=3D"Page">Page:</span>
+</div>
+<div class=3D"details">
+<a id=3D"82706484" data-linked-resource-id=3D"82706484" data-linked-resourc=
+e-type=3D"page" data-linked-resource-version=3D"1" href=3D"https://netrin-t=
+ech.atlassian.net/wiki/spaces/~712020cec19715604f4b198d96dfce72dcdae6/pages=
+/82706484/Post+Workout+Recovery+Breathing+-+Guide+to+Breathing+and+How+to">=
+Post Workout Recovery Breathing - Guide to Breathing and How to</a>
+</div></li>
+<li>
+<div>
+<span class=3D"icon aui-icon content-type-page" title=3D"Page">Page:</span>
+</div>
+<div class=3D"details">
+<a id=3D"82706467" data-linked-resource-id=3D"82706467" data-linked-resourc=
+e-type=3D"page" data-linked-resource-version=3D"1" href=3D"https://netrin-t=
+ech.atlassian.net/wiki/spaces/~712020cec19715604f4b198d96dfce72dcdae6/pages=
+/82706467/Workout+Priming+Breathing+-+Guide+to+Breathing+and+How+to">Workou=
+t Priming Breathing - Guide to Breathing and How to</a>
+</div></li>
+</ul>
+    </div>
+</body>
+</html>
+------=_Part_24_599198399.1768128883519
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/5b59babcae7cb54d196aaff4825f4bdf56c2bc39e071c1fbc3297ad49d2560f7
+
+iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAq1BMVEVHcEwiZpkiZpkiZpkiZpki
+ZpkiZpkiZpkiZpk7iMMiZpnM1t0iZpnM1t07iMMiZpnM1t3M1t3M1t0iZplfnMo7iMM7iMM7iMM7
+iMMiZplVrO7M1t3h6O1ikLOswdCiusxNoeFCkc7Bz9l3nrtamsujxN3Z4efM3OhQpeZPo+OxyNjg
+5+zP2N9Ln95loM5FltM+jcg3dKJfnMpFjsaCp8PQ2eAtbZ1ql7lTqusm12cWAAAAGHRSTlMAUN/P
+IL+vYO/PcCCfzyAQv+9gMIDvYL/uJGE9AAABJklEQVR4Xu3QV27DMBBF0ZFVSDtxeiHV3FtqL/tf
+WSjyYyIBATT05CfgXcDBwwMsGWUDTUtmArqJVHs1iFrMOTLkDgETUmsOSWjXR7WYmIq+TSonReCK
+tGsxL6jVz/Yn5xxL59SFR3MrCQuNnFMVXtUNlFkodtBNSet2fWel5idpIY0QkXq3j2vTT+izpEt2
+UxfSb/RN6w6Eqd49rJpJe0DYclOWLJB63TBBavk7lPdrOnPSyhfC7t3je0IoMUD5jAuackH530MB
+ClCAAhSgAAUoQAFKuSDBBMXAA8mEB4oT4IEA/it0wgWdMUFj4IFODxBK/aCdcV7G6AAIP+jRQBfQ
+KvaBtsYZQrtE0qGvJ6Uuj6ArxVRoa5whOphIKdDO/HN91Ra+ARIL3guc4aKtAAAAAElFTkSuQmCC
+
+------=_Part_24_599198399.1768128883519
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Location: file:///C:/8b42c56981f9df81bed07edc1cf8640dbac4572001869f91dd6588faa6d7ad69
+
+iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAPFBMVEVHcEzM1t3M1t3M1t3M1t3M
+1t2Zoqg9REgpLzPM1t3M1t3M1t3BaU/BaU/BaU/CcFjgtKf////M1dqZqrWLZiLOAAAADnRSTlMA
+IJ/v/zD///8QUN9Q360w504AAADiSURBVHgB7dhVgoUwEERRIIVrw/7XOoI7HRl9fRdwgKS+8J7y
+AwWowPcsCxX6VGjn+ApRnCRxBOVbQQGipC9CYAUpxAMUQ9k4KZCMAZ52WY6lBZrLM6aDVcunreNJ
+OVYth70uZ57Luun6t90BRVn11WBUDZXFiVNNcaG+o1SaQeUBqsyg6s9ADRGBERE1txDxIfprELPf
+BgnUdie1BlB3mjPoxz6Nn+zovtbw+o99I2T/abKjv78j2ZHsSHYkUOvqsLvT3EPmnyY7aohdcwMZ
+9Beg0swpD1BhBhWnP1m0KxfnHV+T0IbfZ3ihAAAAAElFTkSuQmCC
+------=_Part_24_599198399.1768128883519--

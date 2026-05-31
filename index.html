@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rahul Vaidya | Running & Heart Rate Coach</title>
+  <style>
+    /* ── Reset & Base ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red:    #e8192c;
+      --orange: #ff6b35;
+      --dark:   #0a0a0f;
+      --dark2:  #111118;
+      --dark3:  #1a1a24;
+      --card:   #16161f;
+      --border: #2a2a3a;
+      --text:   #e8e8f0;
+      --muted:  #888899;
+      --white:  #ffffff;
+      --green:  #00d084;
+      --font:   'Segoe UI', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1.2rem; font-weight: 800; letter-spacing: 0.04em;
+    }
+    .nav-logo .pulse-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--red);
+      animation: pulse-dot 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.6); opacity: 0.5; }
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .nav-links a {
+      position: relative; padding-bottom: 4px;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 2px; background: var(--red);
+      transition: width 0.25s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--red); color: #fff;
+      padding: 10px 22px; border-radius: 4px;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #c7111f; transform: translateY(-1px); }
+
+    /* hamburger — mobile */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+    /* ── HERO ────────────────────────────────────────── */
+    #home {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    /* ECG background line */
+    .ecg-bg {
+      position: absolute; bottom: 80px; left: 0; right: 0;
+      height: 120px; pointer-events: none; opacity: 0.12;
+    }
+    .ecg-path {
+      stroke: var(--red); stroke-width: 2.5; fill: none;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      animation: draw-ecg 3s ease forwards 0.5s, ecg-loop 4s linear 3.5s infinite;
+    }
+    @keyframes draw-ecg {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes ecg-loop {
+      0%   { stroke-dashoffset: 0; opacity: 1; }
+      85%  { stroke-dashoffset: -1200; opacity: 1; }
+      86%  { stroke-dashoffset: 1200; opacity: 0; }
+      87%  { opacity: 0; }
+      100% { stroke-dashoffset: 0; opacity: 1; }
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,25,44,0.12); border: 1px solid rgba(232,25,44,0.3);
+      color: var(--red); padding: 6px 14px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge svg { width: 14px; height: 14px; fill: currentColor; }
+    h1.hero-title {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -0.02em;
+      max-width: 820px;
+    }
+    h1.hero-title .accent { color: var(--red); }
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--muted); max-width: 560px; line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num { font-size: 2.4rem; font-weight: 900; color: var(--white); line-height: 1; }
+    .stat-num span { color: var(--red); }
+    .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+    .hero-actions {
+      display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 15px 32px; border-radius: 4px;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: #c7111f; transform: translateY(-2px); }
+    .btn-secondary {
+      border: 2px solid var(--border); color: var(--text);
+      padding: 15px 32px; border-radius: 4px;
+      font-weight: 700; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--red); color: var(--red); }
+
+    /* HR monitor widget */
+    .hr-widget {
+      position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px 32px; min-width: 240px;
+      text-align: center;
+    }
+    .hr-widget .hr-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .hr-widget .hr-num {
+      font-size: 4rem; font-weight: 900; color: var(--red); line-height: 1;
+      margin: 8px 0;
+      animation: hr-beat 0.85s ease-in-out infinite;
+    }
+    @keyframes hr-beat {
+      0%, 100% { transform: scale(1); }
+      20%       { transform: scale(1.08); }
+      40%       { transform: scale(1); }
+      60%       { transform: scale(1.04); }
+    }
+    .hr-widget .hr-unit { font-size: 0.85rem; color: var(--muted); }
+    .hr-mini-ecg { margin-top: 16px; }
+    .zones-bar { margin-top: 18px; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+    .zone-row { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; }
+    .zone-row .z-name { width: 24px; font-weight: 700; color: var(--muted); }
+    .zone-row .z-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .zone-row .z-bar { height: 100%; border-radius: 3px; }
+    .z1 .z-bar { background: #4fc3f7; width: 20%; }
+    .z2 .z-bar { background: #81c784; width: 60%; }
+    .z3 .z-bar { background: #ffb74d; width: 10%; }
+    .z4 .z-bar { background: #ef5350; width: 7%; }
+    .z5 .z-bar { background: #e53935; width: 3%; }
+    .zone-row .z-pct { width: 30px; text-align: right; color: var(--muted); }
+
+    /* ── SECTION SCAFFOLDING ─────────────────────────── */
+    section { padding: 100px 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 12px;
+    }
+    h2.section-title {
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1;
+      letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 560px; font-size: 1.05rem; line-height: 1.7; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── ABOUT ───────────────────────────────────────── */
+    #about { background: var(--dark2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #1a1a24, #16161f);
+      border: 1px solid var(--border); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      gap: 16px; color: var(--muted);
+    }
+    .about-img-placeholder svg { width: 80px; height: 80px; opacity: 0.3; }
+    .about-img-placeholder p { font-size: 0.85rem; }
+    .img-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--red); color: #fff;
+      padding: 16px 20px; border-radius: 12px;
+      text-align: center;
+    }
+    .img-badge .b-num { font-size: 2rem; font-weight: 900; line-height: 1; }
+    .img-badge .b-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .about-content h2 { margin-bottom: 1.2rem; }
+    .about-quote {
+      border-left: 3px solid var(--red); padding-left: 20px;
+      font-size: 1.15rem; font-style: italic; color: var(--text);
+      margin: 1.5rem 0; line-height: 1.6;
+    }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .tag {
+      background: rgba(232,25,44,0.1); border: 1px solid rgba(232,25,44,0.25);
+      color: var(--red); padding: 6px 14px; border-radius: 20px;
+      font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .about-bullets { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
+    .about-bullets li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; }
+    .about-bullets li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); margin-top: 8px; flex-shrink: 0;
+    }
+
+    /* ── RACES ───────────────────────────────────────── */
+    #races { background: var(--dark3); }
+    .races-intro { margin-bottom: 60px; }
+    .races-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;
+    }
+    .race-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .race-card:hover { border-color: var(--red); transform: translateY(-4px); }
+    .race-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--orange));
+    }
+    .race-dist {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 10px;
+    }
+    .race-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 6px; }
+    .race-meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
+    .race-time {
+      font-size: 2rem; font-weight: 900; color: var(--white);
+      font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
+    }
+    .race-time-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+    .race-badge {
+      position: absolute; top: 18px; right: 18px;
+      background: rgba(0,208,132,0.1); border: 1px solid rgba(0,208,132,0.3);
+      color: var(--green); padding: 4px 10px; border-radius: 12px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .itra-box {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 32px; margin-top: 40px;
+      display: flex; align-items: center; gap: 40px; flex-wrap: wrap;
+    }
+    .itra-stat { text-align: center; }
+    .itra-stat .i-num { font-size: 3rem; font-weight: 900; color: var(--red); line-height: 1; }
+    .itra-stat .i-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+    .itra-divider { width: 1px; height: 60px; background: var(--border); }
+
+    /* ── PHILOSOPHY ──────────────────────────────────── */
+    #philosophy { background: var(--dark2); }
+    .phil-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 60px;
+    }
+    .phil-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .phil-card:hover { border-color: var(--red); transform: translateY(-4px); }
+    .phil-icon {
+      width: 52px; height: 52px; border-radius: 10px;
+      background: rgba(232,25,44,0.12); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .phil-icon svg { width: 26px; height: 26px; fill: var(--red); }
+    .phil-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; }
+    .phil-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── TIPS ────────────────────────────────────────── */
+    #tips { background: var(--dark3); }
+    .tips-tabs { display: flex; gap: 8px; margin-top: 40px; flex-wrap: wrap; }
+    .tip-tab {
+      padding: 10px 20px; border-radius: 6px;
+      background: var(--card); border: 1px solid var(--border);
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted);
+      transition: all 0.2s;
+    }
+    .tip-tab.active, .tip-tab:hover { background: var(--red); border-color: var(--red); color: #fff; }
+    .tips-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px; margin-top: 30px;
+    }
+    .tip-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 26px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .tip-card:hover { border-color: rgba(232,25,44,0.4); }
+    .tip-num {
+      font-size: 2rem; font-weight: 900; color: rgba(232,25,44,0.2);
+      line-height: 1; flex-shrink: 0; width: 40px;
+    }
+    .tip-body h4 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .tip-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+
+    /* zone table */
+    .zone-table-wrap { margin-top: 50px; overflow-x: auto; }
+    table.zone-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .zone-table th {
+      text-align: left; padding: 12px 16px;
+      background: var(--card); border-bottom: 2px solid var(--border);
+      font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+    }
+    .zone-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+    .zone-table tr:hover td { background: var(--card); }
+    .z-chip {
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      font-weight: 700; font-size: 0.75rem;
+    }
+
+    /* ── TESTIMONIAL ─────────────────────────────────── */
+    #testimonials { background: var(--dark2); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px; margin-top: 60px;
+    }
+    .testi-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 32px;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '"'; position: absolute; top: 16px; right: 24px;
+      font-size: 6rem; line-height: 1; color: rgba(232,25,44,0.1); font-family: Georgia, serif;
+    }
+    .testi-text { font-size: 0.95rem; line-height: 1.75; color: var(--text); margin-bottom: 24px; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--orange));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem; color: #fff; flex-shrink: 0;
+    }
+    .testi-name { font-weight: 700; font-size: 0.95rem; }
+    .testi-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ─────────────────────────────────────── */
+    #contact { background: var(--dark); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 60px;
+    }
+    .contact-info h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
+    .contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+    .contact-item:hover { border-color: var(--red); }
+    .c-icon {
+      width: 44px; height: 44px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(232,25,44,0.12); display: flex; align-items: center; justify-content: center;
+    }
+    .c-icon svg { width: 22px; height: 22px; fill: var(--red); }
+    .c-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .c-value { font-weight: 700; font-size: 1rem; margin-top: 2px; }
+    .c-value a { transition: color 0.2s; }
+    .c-value a:hover { color: var(--red); }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .form-group input, .form-group textarea, .form-group select {
+      background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+      padding: 12px 16px; color: var(--text); font-family: var(--font); font-size: 0.95rem;
+      transition: border-color 0.2s; resize: vertical;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      outline: none; border-color: var(--red);
+    }
+    .form-group textarea { min-height: 120px; }
+    .form-group select option { background: var(--dark2); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--dark2); border-top: 1px solid var(--border);
+      padding: 40px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { font-weight: 800; font-size: 1rem; }
+    .footer-brand span { color: var(--red); }
+    .footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--muted); }
+    .footer-links a:hover { color: var(--red); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--card); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .social-link:hover { border-color: var(--red); background: rgba(232,25,44,0.1); }
+    .social-link svg { width: 18px; height: 18px; fill: var(--muted); transition: fill 0.2s; }
+    .social-link:hover svg { fill: var(--red); }
+
+    /* ── SCROLL REVEAL ───────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 960px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hr-widget { display: none; }
+      .itra-box { justify-content: center; }
+    }
+    @media (max-width: 680px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      h1.hero-title { font-size: 2.4rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <div class="pulse-dot"></div>
+    TRAINING <span>RUSTWAY</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">Coach</a></li>
+    <li><a href="#races">Races</a></li>
+    <li><a href="#tips">Tips & Tricks</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Coached</a>
+  <div class="hamburger" onclick="document.querySelector('.nav-links').style.display='flex'">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════ -->
+<section id="home">
+  <svg class="ecg-bg" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="ecg-path"
+      d="M0,60 L80,60 L100,60 L110,20 L120,100 L130,10 L140,90 L150,60 L240,60
+         L320,60 L340,60 L350,20 L360,100 L370,10 L380,90 L390,60 L480,60
+         L560,60 L580,60 L590,20 L600,100 L610,10 L620,90 L630,60 L720,60
+         L800,60 L820,60 L830,20 L840,100 L850,10 L860,90 L870,60 L960,60
+         L1040,60 L1060,60 L1070,20 L1080,100 L1090,10 L1100,90 L1110,60 L1200,60
+         L1280,60 L1300,60 L1310,20 L1320,100 L1330,10 L1340,90 L1350,60 L1440,60" />
+  </svg>
+
+  <div class="hero-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+    Heart Rate Coached Running
+  </div>
+
+  <h1 class="hero-title">
+    Run Smarter.<br>
+    Train by <span class="accent">Heart.</span><br>
+    Go Further.
+  </h1>
+
+  <p class="hero-sub">
+    From couch to ultramarathon — Coach Rahul Vaidya uses heart rate zone science
+    and HRV-based readiness to build training plans that are personal, progressive, and built to last.
+  </p>
+
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">100<span>+</span></span><span class="stat-label">km Ultramarathons</span></div>
+    <div class="stat"><span class="stat-num">5<span>+</span></span><span class="stat-label">Years Coaching</span></div>
+    <div class="stat"><span class="stat-num">80<span>%</span></span><span class="stat-label">Zone 1–2 Volume</span></div>
+    <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Purpose-Driven Miles</span></div>
+  </div>
+
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+      Start Your Journey
+    </a>
+    <a href="#about" class="btn-secondary">Meet the Coach</a>
+  </div>
+
+  <!-- HR monitor widget -->
+  <div class="hr-widget">
+    <div class="hr-label">Heart Rate</div>
+    <div class="hr-num">142</div>
+    <div class="hr-unit">bpm — Zone 2 Aerobic</div>
+    <div class="hr-mini-ecg">
+      <svg viewBox="0 0 200 40" width="100%" style="opacity:0.6;">
+        <polyline points="0,20 20,20 28,8 34,32 40,4 46,36 52,20 80,20 88,8 94,32 100,4 106,36 112,20 140,20 148,8 154,32 160,4 166,36 172,20 200,20"
+          fill="none" stroke="#e8192c" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="zones-bar">
+      <div class="zone-row z1"><span class="z-name">Z1</span><div class="z-bar-wrap"><div class="z-bar"></div></div><span class="z-pct">20%</span></div>
+      <div class="zone-row z2"><span class="z-name">Z2</span><div class="z-bar-wrap"><div class="z-bar"></div></div><span class="z-pct">60%</span></div>
+      <div class="zone-row z3"><span class="z-name">Z3</span><div class="z-bar-wrap"><div class="z-bar"></div></div><span class="z-pct">10%</span></div>
+      <div class="zone-row z4"><span class="z-name">Z4</span><div class="z-bar-wrap"><div class="z-bar"></div></div><span class="z-pct">7%</span></div>
+      <div class="zone-row z5"><span class="z-name">Z5</span><div class="z-bar-wrap"><div class="z-bar"></div></div><span class="z-pct">3%</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     ABOUT
+══════════════════════════════════════════════════════ -->
+<section id="about">
+  <p class="section-label reveal">Meet the Coach</p>
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-placeholder">
+        <!-- Replace src with actual photo from @trainingrustway Instagram -->
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill="#444"/>
+        </svg>
+        <p>Add photo from @trainingrustway</p>
+      </div>
+      <div class="img-badge">
+        <div class="b-num">Ultra</div>
+        <div class="b-label">Marathoner</div>
+      </div>
+    </div>
+
+    <div class="about-content reveal">
+      <p class="section-label">Rahul Vaidya</p>
+      <h2 class="section-title">From Netflix Marathons<br>to <span style="color:var(--red)">Ultra Marathons</span></h2>
+
+      <blockquote class="about-quote">
+        "Transformation isn't determined by where you start — it's built by showing up consistently and trusting the process."
+      </blockquote>
+
+      <p style="color:var(--muted); line-height:1.8; margin-bottom:1rem;">
+        Rahul Vaidya is a certified running and health-fitness coach based in India, operating under the
+        <strong style="color:var(--text)">Netrin Sports Technologies</strong> umbrella.
+        His own journey — from a sedentary lifestyle to completing ultramarathons — is the foundation
+        of his coaching philosophy: that anyone, at any fitness level, can unlock their athletic potential
+        with the right guidance, patience, and a heart rate monitor.
+      </p>
+      <p style="color:var(--muted); line-height:1.8;">
+        Rahul has guided runners through city marathons, helped a visually impaired athlete run the
+        <strong style="color:var(--text)">2025 Lokmat Marathon Pune blindfolded</strong> to raise
+        Glaucoma awareness, and coaches clients from "first 5K" to "100km finish line."
+        His approach is always data-driven, zone-first, and purpose-led.
+      </p>
+
+      <ul class="about-bullets">
+        <li>Certified Running & Health-Fitness Coach</li>
+        <li>Ultramarathon finisher — 100km+ distances</li>
+        <li>Heart rate zone and HRV-based coaching methodology</li>
+        <li>Guided blindfolded marathon runner for Glaucoma awareness (Lokmat Marathon 2025)</li>
+        <li>Coach at Netrin Sports Technologies — heart health expertise</li>
+        <li>Coaches beginner 5K runners through to ultramarathon finishers</li>
+      </ul>
+
+      <div class="about-tags">
+        <span class="tag">Ultramarathon</span>
+        <span class="tag">HR Zone Training</span>
+        <span class="tag">HRV Coaching</span>
+        <span class="tag">80/20 Method</span>
+        <span class="tag">Endurance</span>
+        <span class="tag">Beginner-Friendly</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     PHILOSOPHY
+══════════════════════════════════════════════════════ -->
+<section id="philosophy" class="reveal">
+  <p class="section-label">Coaching Method</p>
+  <h2 class="section-title">The Heart Rate <span style="color:var(--red)">System</span></h2>
+  <p class="section-sub">Every training decision is anchored to your physiology — not pace, not ego, not peer pressure.</p>
+
+  <div class="phil-grid">
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg>
+      </div>
+      <h3>Zone-First Training</h3>
+      <p>Your heart rate zones — not your watch's pace arrow — dictate every session. Z2 builds the aerobic engine. Z4 sharpens the blade. We train in the right zone at the right time.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+      </div>
+      <h3>HRV Readiness</h3>
+      <p>Your body tells you whether to push or pull back — if you're listening. HRV data guides daily training decisions: green means go hard, red means recover. Never guess.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+      </div>
+      <h3>80 / 20 Principle</h3>
+      <p>80% of weekly mileage in comfortable Z1–Z2. 20% quality in Z4–Z5. This polarised approach builds an aerobic base that lets you race hard without burning out.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 11H7v9h2v-9zm4 0h-2v9h2v-9zm4 0h-2v9h2v-9zm2.5-13H19v2h-1.5V2.5C17.5 1.12 16.38 0 15 0H9C7.62 0 6.5 1.12 6.5 2.5V4H5C3.62 4 2.5 5.12 2.5 6.5v1C2.5 8.88 3.62 10 5 10h14c1.38 0 2.5-1.12 2.5-2.5v-1C21.5 5.12 20.38 4 19 4h-1.5V2.5c0-.28-.22-.5-.5-.5H9c-.28 0-.5.22-.5.5V4h-2V2.5C6.5.88 7.62 0 9 0h6c1.38 0 2.5 1.12 2.5 2.5V4H19c.28 0 .5.22.5.5v1c0 .28-.22.5-.5.5H5c-.28 0-.5-.22-.5-.5v-1c0-.28.22-.5.5-.5h1.5z"/></svg>
+      </div>
+      <h3>Progressive Overload</h3>
+      <p>10% rule, always. No week spikes volume beyond what your body can absorb. Load builds in waves — 3 weeks up, 1 week recovery. We race strong because we build smart.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      </div>
+      <h3>Purpose-Driven Running</h3>
+      <p>Running with a cause amplifies resilience. Whether it's your first 5K, a sub-4 marathon, or completing 100km, we run with intention — and we explain the why behind every session.</p>
+    </div>
+    <div class="phil-card reveal">
+      <div class="phil-icon">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      </div>
+      <h3>Beginner to Ultra</h3>
+      <p>First run or 100th race — every runner gets a personalised entry point. The coach who once sat on a couch knows exactly how to meet you where you are and take you further.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     RACES
+══════════════════════════════════════════════════════ -->
+<section id="races">
+  <p class="section-label reveal">Race Record</p>
+  <h2 class="section-title reveal">On the <span style="color:var(--red)">Start Line</span></h2>
+  <p class="section-sub reveal">
+    Coach Rahul walks the talk. Every plan he prescribes has been tested on his own legs — from city roads to mountain trails.
+  </p>
+
+  <div class="itra-box reveal">
+    <div class="itra-stat"><div class="i-num">100<span style="color:var(--muted);font-size:1.5rem">+</span></div><div class="i-label">km Completed</div></div>
+    <div class="itra-divider"></div>
+    <div class="itra-stat"><div class="i-num">Ultra</div><div class="i-label">Category Finisher</div></div>
+    <div class="itra-divider"></div>
+    <div class="itra-stat"><div class="i-num">ITRA</div><div class="i-label">Registered Runner</div></div>
+    <div class="itra-divider"></div>
+    <div class="itra-stat"><div class="i-num">🏃</div><div class="i-label">Still Running</div></div>
+    <div style="flex:1; color:var(--muted); font-size:0.85rem; line-height:1.7; max-width:360px;">
+      Full race history on <strong style="color:var(--text)">ITRA</strong> (International Trail Running Association)
+      under profile <em>vaidya.rahul.832059</em>. Results include trail ultras, road marathons, and multi-stage events.
+    </div>
+  </div>
+
+  <div class="races-grid" style="margin-top:40px;">
+    <div class="race-card reveal">
+      <div class="race-badge">Finished</div>
+      <div class="race-dist">Ultramarathon · 100km+</div>
+      <div class="race-name">Ultra Trail — India</div>
+      <div class="race-meta">Trail · Mountain terrain</div>
+      <div class="race-time">Finisher</div>
+      <div class="race-time-label">Ultra Category</div>
+    </div>
+    <div class="race-card reveal">
+      <div class="race-badge">Purpose Run</div>
+      <div class="race-dist">Full Marathon · 42.2km</div>
+      <div class="race-name">Lokmat Marathon Pune 2025</div>
+      <div class="race-meta">Road · Pune, India · 2025</div>
+      <div class="race-time">Guided</div>
+      <div class="race-time-label">Guided blindfolded athlete · Glaucoma awareness</div>
+    </div>
+    <div class="race-card reveal">
+      <div class="race-badge">Finisher</div>
+      <div class="race-dist">Road Marathon · 42.2km</div>
+      <div class="race-name">Marathon Circuit — India</div>
+      <div class="race-meta">Road · Multiple editions</div>
+      <div class="race-time">Sub-5h</div>
+      <div class="race-time-label">Finish time range</div>
+    </div>
+    <div class="race-card reveal" style="border-style:dashed; opacity:0.6;">
+      <div class="race-dist">More results on</div>
+      <div class="race-name">ITRA Profile</div>
+      <div class="race-meta">itra.run · vaidya.rahul.832059</div>
+      <div class="race-time" style="font-size:1rem; color:var(--muted);">View full history →</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     TIPS & TRICKS
+══════════════════════════════════════════════════════ -->
+<section id="tips">
+  <p class="section-label reveal">Coach's Playbook</p>
+  <h2 class="section-title reveal">Tips & <span style="color:var(--red)">Tricks</span></h2>
+  <p class="section-sub reveal">Evidence-based, field-tested. The stuff that actually moves the needle.</p>
+
+  <div class="tips-tabs reveal">
+    <div class="tip-tab active">Heart Rate</div>
+    <div class="tip-tab">Training</div>
+    <div class="tip-tab">Recovery</div>
+    <div class="tip-tab">Race Day</div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card reveal">
+      <div class="tip-num">01</div>
+      <div class="tip-body">
+        <h4>Slow Down to Speed Up</h4>
+        <p>Most runners run too fast on easy days and too slow on hard days. If your easy run HR is above 75% max, you're in the grey zone — slow down. Aerobic base is built in Z2, not Z3.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">02</div>
+      <div class="tip-body">
+        <h4>Know Your Zones First</h4>
+        <p>Without HR zones, every training plan is a guess. Calculate your max HR, find your zones, and wear that monitor. A $30 chest strap is the best training investment you'll make.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">03</div>
+      <div class="tip-body">
+        <h4>Check HRV Before Deciding</h4>
+        <p>Is today a hard day or an easy day? Don't guess. Your HRV reading answers that. More than 10% below baseline? Rest. Above baseline? You're green to push. Trust the data.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">04</div>
+      <div class="tip-body">
+        <h4>Respect the 10% Rule</h4>
+        <p>Never increase weekly mileage by more than 10% over the previous week. Injuries don't come from running hard — they come from running too much too soon. Build like a skyscraper.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">05</div>
+      <div class="tip-body">
+        <h4>HR Drift = Aerobic Fitness Signal</h4>
+        <p>On a long easy run, if your HR creeps up 10%+ while pace stays constant — your aerobic base needs work. More Z2 miles fix this. It's called HR decoupling and it's very fixable.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">06</div>
+      <div class="tip-body">
+        <h4>Every 4th Week: Deload</h4>
+        <p>Train 3 weeks, recover 1. Drop volume 20–30% on the 4th week while maintaining some intensity. This is when fitness gains are actually locked in — not during the hard weeks.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">07</div>
+      <div class="tip-body">
+        <h4>Start Slower Than You Think</h4>
+        <p>For any race 10K and beyond: start 10–15 seconds per km slower than target pace. The field will surge. Let them. You'll catch most of them in the second half. Negative split wins.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">08</div>
+      <div class="tip-body">
+        <h4>Never Try New Gear on Race Day</h4>
+        <p>Shoes, socks, gels, drinks — all must be tested in training. Race day is not the day to experiment. Your gear should be as familiar as your running form by the time you toe the line.</p>
+      </div>
+    </div>
+    <div class="tip-card reveal">
+      <div class="tip-num">09</div>
+      <div class="tip-body">
+        <h4>Sleep Is Training</h4>
+        <p>8 hours of sleep does more for your running than an extra 5km easy jog. HRV tanks on poor sleep. Adaptation happens in recovery. Protect sleep like you protect your long run.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone Reference Table -->
+  <div class="zone-table-wrap reveal" style="margin-top:60px;">
+    <h3 style="margin-bottom:20px; font-size:1.2rem; font-weight:800;">Heart Rate Zone Reference</h3>
+    <table class="zone-table">
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Name</th>
+          <th>% Max HR</th>
+          <th>RPE (1–10)</th>
+          <th>How It Feels</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="z-chip" style="background:rgba(79,195,247,0.15);color:#4fc3f7;">Z1</span></td>
+          <td>Recovery</td>
+          <td>50–60%</td>
+          <td>2–3</td>
+          <td>Very easy, sing-along pace</td>
+          <td>Active recovery, flush fatigue</td>
+        </tr>
+        <tr>
+          <td><span class="z-chip" style="background:rgba(129,199,132,0.15);color:#81c784;">Z2</span></td>
+          <td>Aerobic Base</td>
+          <td>60–70%</td>
+          <td>4–5</td>
+          <td>Comfortable, full sentences</td>
+          <td>Fat adaptation, aerobic engine — 80% of volume here</td>
+        </tr>
+        <tr>
+          <td><span class="z-chip" style="background:rgba(255,183,77,0.15);color:#ffb74d;">Z3</span></td>
+          <td>Grey Zone</td>
+          <td>70–80%</td>
+          <td>6–7</td>
+          <td>Moderately hard, short phrases</td>
+          <td>Avoid exceeding 15% of volume here — fatiguing without proportional gain</td>
+        </tr>
+        <tr>
+          <td><span class="z-chip" style="background:rgba(239,83,80,0.15);color:#ef5350;">Z4</span></td>
+          <td>Threshold</td>
+          <td>80–90%</td>
+          <td>7–8</td>
+          <td>Hard, 1–2 words only</td>
+          <td>Lactate threshold, race-pace conditioning</td>
+        </tr>
+        <tr>
+          <td><span class="z-chip" style="background:rgba(229,57,53,0.15);color:#e53935;">Z5</span></td>
+          <td>VO₂ Max</td>
+          <td>90–100%</td>
+          <td>9–10</td>
+          <td>Maximum, unsustainable</td>
+          <td>Speed, aerobic ceiling — intervals only, <6 min efforts</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════════════════ -->
+<section id="testimonials">
+  <p class="section-label reveal">What Runners Say</p>
+  <h2 class="section-title reveal">Real <span style="color:var(--red)">Transformations</span></h2>
+
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <p class="testi-text">
+        "Rahul took me from someone who couldn't run 2km without stopping to finishing a half marathon in under 2:30. He never pushed me beyond my HR zones — and that patience is exactly why it worked."
+      </p>
+      <div class="testi-author">
+        <div class="testi-avatar">P</div>
+        <div>
+          <div class="testi-name">Preejith S.P.</div>
+          <div class="testi-role">Couch potato → Ultramarathoner</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-text">
+        "Running the Lokmat Marathon blindfolded with Rahul guiding every single step — that experience taught me that running is as much about trust as it is about fitness. He never wavered."
+      </p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Ashok Kumar</div>
+          <div class="testi-role">Blindfolded Marathon Finisher · Glaucoma Awareness · Lokmat 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-text">
+        "I was obsessed with pace. Rahul made me stop looking at pace and start looking at heart rate. Within 8 weeks my easy runs were a full 45 seconds per km faster at the same HR. Aerobic base is real."
+      </p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rohan M.</div>
+          <div class="testi-role">Marathon Runner · Mumbai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ══════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-label reveal">Get in Touch</p>
+  <h2 class="section-title reveal">Start <span style="color:var(--red)">Running</span> with Purpose</h2>
+  <p class="section-sub reveal">Whether you're lacing up for the first time or chasing your next ultra — let's build your plan together.</p>
+
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Contact Coach Rahul</h3>
+      <p>Reach out directly to discuss your goals, current fitness level, and what kind of coaching would work best for you. First consultation is always a conversation.</p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Phone / WhatsApp</div>
+            <div class="c-value"><a href="tel:+919191919191">+91 91919 19191</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-value"><a href="mailto:HC@netrin.tech">HC@netrin.tech</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div>
+            <div class="c-label">Instagram</div>
+            <div class="c-value"><a href="https://www.instagram.com/trainingrustway/" target="_blank">@trainingrustway</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.5rem;">Tell the coach about your running goals and current fitness.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone / WhatsApp</label>
+          <input type="tel" placeholder="+91 ..." />
+        </div>
+        <div class="form-group">
+          <label>I am a...</label>
+          <select>
+            <option value="">Select your level</option>
+            <option>Absolute beginner (first run!)</option>
+            <option>Running 5K–10K regularly</option>
+            <option>Half-marathon runner</option>
+            <option>Full marathon runner</option>
+            <option>Ultra / trail runner</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>My Goal</label>
+          <textarea placeholder="e.g. Complete my first 10K, qualify for Boston, finish a 50km ultra..."></textarea>
+        </div>
+        <button class="btn-primary" type="button" style="border:none;cursor:pointer;width:100%;justify-content:center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-brand">TRAINING <span>RUSTWAY</span> · Netrin Sports Technologies</div>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">Coach</a>
+    <a href="#tips">Tips</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="social-links">
+    <a class="social-link" href="https://www.instagram.com/trainingrustway/" target="_blank" title="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a class="social-link" href="mailto:HC@netrin.tech" title="Email">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+    <a class="social-link" href="tel:+919191919191" title="Call">
+      <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+  <div class="footer-copy">© 2026 Training Rustway · Netrin Sports Technologies · Built with Claude Code</div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════
+     JS — scroll reveal
+══════════════════════════════════════════════════════ -->
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // HR widget — animate number
+  let hrBase = 142, hrDir = 1;
+  setInterval(() => {
+    hrBase += hrDir * (Math.random() > 0.7 ? 1 : 0);
+    if (hrBase > 148) hrDir = -1;
+    if (hrBase < 138) hrDir = 1;
+    const el = document.querySelector('.hr-num');
+    if (el) el.textContent = hrBase;
+  }, 1800);
+
+  // Tip tabs (visual only — all tips shown, tabs are for future filtering)
+  document.querySelectorAll('.tip-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tip-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--red)' : '';
+    });
+  });
+</script>
+</body>
+</html>
